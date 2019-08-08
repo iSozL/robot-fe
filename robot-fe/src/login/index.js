@@ -37,6 +37,10 @@ class Login extends React.Component {
     api.fetchData("api/user/login", "post", datas).then(
       res => {
         console.log(res.data);
+        if(res.status === 200) {
+          window.localStorage.setItem('username', res.data.truename);
+          window.localStorage.setItem('userImage', res.data.photo);
+        }
       },
       error => {
         console.log(error);

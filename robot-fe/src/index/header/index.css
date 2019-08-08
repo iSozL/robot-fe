@@ -1,0 +1,18 @@
+.header-title {
+  color: #ffffff;
+  font-size: 30px;
+  font-weight: 1000;
+  letter-spacing: 5px;
+}
+img {
+  width: 40px;
+  height: 40px;
+  border-radius: 100px;
+  margin-right: 20px;
+}
+body {
+  color: #ffffff;
+}
+.userInfo {
+  float: right;
+}
