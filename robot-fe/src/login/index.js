@@ -34,7 +34,7 @@ class Login extends React.Component {
       password: this.state.password,
       remember_me: this.state.remember_me
     };
-    api.fetchData("https://usv2.ncuos.com/api/user/login", "post", datas).then(
+    api.fetchData("api/user/login", "post", datas).then(
       res => {
         console.log(res.data);
       },
