@@ -1,0 +1,19 @@
+.container {
+  width: 450px;
+  margin: 0 auto;
+  margin-top: 100px;
+}
+.login-title {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+.login-tip {
+  text-align: center;
+  font-size: 14px;
+  margin-bottom: 40px;
+}
+.input-style {
+  margin-bottom: 40px
+}

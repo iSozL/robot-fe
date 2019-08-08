@@ -1,10 +1,20 @@
 import React from 'react';
-
+import ReactDom from "react-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Redirect,
+  Route,
+  Link
+} from "react-router-dom";
+import Login from '../src/login/index';
 function App() {
   return (
-    <div>
-      hello Robot
-    </div>
+    <Router>
+      <Switch>
+        <Route path='/' component={Login}/>
+      </Switch>
+    </Router>
   );
 }
 
