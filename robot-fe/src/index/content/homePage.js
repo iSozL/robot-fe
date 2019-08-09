@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Divider, Icon, Card } from "antd";
 import "./homePage.css";
 
@@ -15,6 +16,7 @@ const SentenceLib = () => {
       <div>
         {funcData.map(item => {
           return (
+            <Link to="/sentence">
             <Card style={{ width: "120px", height: "120px", float: "left", marginRight: "20px", marginBottom: "20px" }}>
               <Icon
                 type={item.icon}
@@ -24,6 +26,7 @@ const SentenceLib = () => {
                 {item.name}
               </div>
             </Card>
+            </Link>
           );
         })}
       </div>
