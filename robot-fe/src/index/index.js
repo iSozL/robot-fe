@@ -1,13 +1,9 @@
 import React from "react";
-import Head from "./header/index";
 import { Layout, Menu, Breadcrumb, Icon } from "antd";
-import SiderBar from "./siderBar/index";
 import SentenceLib from "./content/homePage";
-const { SubMenu } = Menu;
-const { Header, Content, Footer, Sider } = Layout;
+const { Content } = Layout;
 
 const Index = () => {
-  const test = false;
   return (
     // <Layout>
     //   <Header className="header">
@@ -23,9 +19,9 @@ const Index = () => {
     //       <Sider width={200} style={{ background: "#fff" }}>
     //         <SiderBar />
     //       </Sider>
-          <Content style={{ padding: "0 24px", minHeight: 280 }}>
-            <SentenceLib />
-          </Content>
+    // <Content style={{ padding: "0 24px", minHeight: 280 }}>
+      <SentenceLib />
+    // </Content>
     //     </Layout>
     //   </Content>
     //   <Footer style={{ textAlign: "center" }}>

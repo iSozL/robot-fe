@@ -17,12 +17,11 @@ import React from "react";
 import Head from "../index/header/index";
 import { Layout, Menu, Breadcrumb, Icon } from "antd";
 import SiderBar from "../index/siderBar/index";
-import SentenceLib from "../index/content/homePage";
 const { SubMenu } = Menu;
 const { Header, Content, Footer, Sider } = Layout;
 class Layouts extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
   render() {
     return (
@@ -40,10 +39,9 @@ class Layouts extends React.Component {
             <Sider width={200} style={{ background: "#fff" }}>
               <SiderBar />
             </Sider>
-            {/* <Content style={{ padding: "0 24px", minHeight: 280 }}>
-              <SentenceLib />
-            </Content> */}
+            <Content style={{ padding: "0 24px", minHeight: 280 }}>
             {this.props.children}
+            </Content>
           </Layout>
         </Content>
         <Footer style={{ textAlign: "center" }}>
@@ -52,5 +50,5 @@ class Layouts extends React.Component {
       </Layout>
     );
   }
-};
+}
 export default Layouts;
