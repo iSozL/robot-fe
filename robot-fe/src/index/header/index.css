@@ -10,9 +10,7 @@ img {
   border-radius: 100px;
   margin-right: 20px;
 }
-body {
-  color: #ffffff;
-}
 .userInfo {
   float: right;
+  color: #ffffff;
 }
