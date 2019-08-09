@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport" />
     <title>RobotHao</title>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
   </head>
@@ -16,30 +17,65 @@
       top: 0;
       left: 0;
       right: 0;
+      bottom: 0;
       height: 100%;
       width: 100%;
     }
   </style>
   <script>
+    !(function(win, doc) {
+      function setFontSize() {
+        var baseFontSize = 100;
+        var baseWidth = 320;
+        var clientWidth =
+          document.documentElement.clientWidth || window.innerWidth;
+        var innerWidth = Math.max(Math.min(clientWidth, 480), 320);
+        var rem = 100;
+        if (innerWidth > 362 && innerWidth <= 375) {
+          rem = Math.floor((innerWidth / baseWidth) * baseFontSize * 0.9);
+        }
+        if (innerWidth > 375) {
+          rem = Math.floor((innerWidth / baseWidth) * baseFontSize * 0.84);
+        }
+        window.__baseREM = rem;
+        document.querySelector("html").style.fontSize = rem + "px";
+      }
+      var evt = "onorientationchange" in win ? "orientationchange" : "resize";
+      var timer = null;
+      win.addEventListener(
+        evt,
+        function() {
+          clearTimeout(timer);
+          timer = setTimeout(setFontSize, 300);
+        },
+        false
+      );
+      win.addEventListener(
+        "pageshow",
+        function(e) {
+          if (e.persisted) {
+            clearTimeout(timer);
+            timer = setTimeout(setFontSize, 300);
+          }
+        },
+        false
+      );
+      setFontSize();
+    })(window, document);
     (function() {
       var ParticleNetworkAnimation, PNA;
       ParticleNetworkAnimation = PNA = function() {};
-
       PNA.prototype.init = function(element) {
         this.$el = $(element);
-
         this.container = element;
         this.canvas = document.createElement("canvas");
         this.sizeCanvas();
         this.container.appendChild(this.canvas);
         this.ctx = this.canvas.getContext("2d");
         this.particleNetwork = new ParticleNetwork(this);
-
         this.bindUiActions();
-
         return this;
       };
-
       PNA.prototype.bindUiActions = function() {
         $(window).on(
           "resize",
@@ -51,12 +87,10 @@
           }.bind(this)
         );
       };
-
       PNA.prototype.sizeCanvas = function() {
         this.canvas.width = this.container.offsetWidth;
         this.canvas.height = this.container.offsetHeight;
       };
-
       var Particle = function(parent, x, y) {
         this.network = parent;
         this.canvas = parent.canvas;
@@ -73,7 +107,6 @@
           y: (Math.random() - 0.5) * parent.options.velocity
         };
       };
-
       Particle.prototype.update = function() {
         if (this.opacity < 1) {
           this.opacity += 0.01;
@@ -87,12 +120,10 @@
         if (this.y > this.canvas.height + 100 || this.y < -100) {
           this.velocity.y = -this.velocity.y;
         }
-
         // Update position
         this.x += this.velocity.x;
         this.y += this.velocity.y;
       };
-
       Particle.prototype.draw = function() {
         // Draw particle
         this.ctx.beginPath();
@@ -101,7 +132,6 @@
         this.ctx.arc(this.x, this.y, this.radius, 0, 12 * Math.PI);
         this.ctx.fill();
       };
-
       var ParticleNetwork = function(parent) {
         this.options = {
           velocity: 1, // the higher the faster
@@ -112,27 +142,21 @@
         };
         this.canvas = parent.canvas;
         this.ctx = parent.ctx;
-
         this.init();
       };
-
       ParticleNetwork.prototype.init = function() {
         // Create particle objects
         this.createParticles(true);
-
         // Update canvas
         this.animationFrame = requestAnimationFrame(this.update.bind(this));
-
         this.bindUiActions();
       };
-
       ParticleNetwork.prototype.createParticles = function(isInitial) {
         // Initialise / reset particles
         var me = this;
         this.particles = [];
         var quantity =
           (this.canvas.width * this.canvas.height) / this.options.density;
-
         if (isInitial) {
           var counter = 0;
           clearInterval(this.createIntervalId);
@@ -155,7 +179,6 @@
           }
         }
       };
-
       ParticleNetwork.prototype.createInteractionParticle = function() {
         // Add interaction particle
         this.interactionParticle = new Particle(this);
@@ -166,7 +189,6 @@
         this.particles.push(this.interactionParticle);
         return this.interactionParticle;
       };
-
       ParticleNetwork.prototype.removeInteractionParticle = function() {
         // Find it
         var index = this.particles.indexOf(this.interactionParticle);
@@ -176,25 +198,21 @@
           this.particles.splice(index, 1);
         }
       };
-
       ParticleNetwork.prototype.update = function() {
         if (this.canvas) {
           this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
           this.ctx.globalAlpha = 1;
-
           // Draw connections
           for (var i = 0; i < this.particles.length; i++) {
             for (var j = this.particles.length - 1; j > i; j--) {
               var distance,
                 p1 = this.particles[i],
                 p2 = this.particles[j];
-
               // check very simply if the two points are even a candidate for further measurements
               distance = Math.min(Math.abs(p1.x - p2.x), Math.abs(p1.y - p2.y));
               if (distance > this.options.netLineDistance) {
                 continue;
               }
-
               // the two points seem close enough, now let's measure precisely
               distance = Math.sqrt(
                 Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2)
@@ -202,7 +220,6 @@
               if (distance > this.options.netLineDistance) {
                 continue;
               }
-
               this.ctx.beginPath();
               this.ctx.strokeStyle = this.options.netLineColor;
               this.ctx.globalAlpha =
@@ -216,13 +233,11 @@
               this.ctx.stroke();
             }
           }
-
           // Draw particles
           for (var i = 0; i < this.particles.length; i++) {
             this.particles[i].update();
             this.particles[i].draw();
           }
-
           if (this.options.velocity !== 0) {
             this.animationFrame = requestAnimationFrame(this.update.bind(this));
           }
@@ -230,13 +245,11 @@
           cancelAnimationFrame(this.animationFrame);
         }
       };
-
       ParticleNetwork.prototype.bindUiActions = function() {
         // Mouse / touch event handling
         this.spawnQuantity = 3;
         this.mouseIsDown = false;
         this.touchIsMoving = false;
-
         this.onMouseMove = function(e) {
           if (!this.interactionParticle) {
             this.createInteractionParticle();
@@ -244,7 +257,6 @@
           this.interactionParticle.x = e.offsetX;
           this.interactionParticle.y = e.offsetY;
         }.bind(this);
-
         this.onTouchMove = function(e) {
           e.preventDefault();
           this.touchIsMoving = true;
@@ -254,7 +266,6 @@
           this.interactionParticle.x = e.changedTouches[0].clientX;
           this.interactionParticle.y = e.changedTouches[0].clientY;
         }.bind(this);
-
         this.onMouseDown = function(e) {
           this.mouseIsDown = true;
           var counter = 0;
@@ -284,7 +295,6 @@
             50
           );
         }.bind(this);
-
         this.onTouchStart = function(e) {
           e.preventDefault();
           setTimeout(
@@ -304,21 +314,17 @@
             200
           );
         }.bind(this);
-
         this.onMouseUp = function(e) {
           this.mouseIsDown = false;
         }.bind(this);
-
         this.onMouseOut = function(e) {
           this.removeInteractionParticle();
         }.bind(this);
-
         this.onTouchEnd = function(e) {
           e.preventDefault();
           this.touchIsMoving = false;
           this.removeInteractionParticle();
         }.bind(this);
-
         this.canvas.addEventListener("mousemove", this.onMouseMove);
         this.canvas.addEventListener("touchmove", this.onTouchMove);
         this.canvas.addEventListener("mousedown", this.onMouseDown);
@@ -327,7 +333,6 @@
         this.canvas.addEventListener("mouseout", this.onMouseOut);
         this.canvas.addEventListener("touchend", this.onTouchEnd);
       };
-
       ParticleNetwork.prototype.unbindUiActions = function() {
         if (this.canvas) {
           this.canvas.removeEventListener("mousemove", this.onMouseMove);
@@ -339,7 +344,6 @@
           this.canvas.removeEventListener("touchend", this.onTouchEnd);
         }
       };
-
       var getLimitedRandom = function(min, max, roundToInteger) {
         var number = Math.random() * (max - min) + min;
         if (roundToInteger) {
@@ -347,11 +351,9 @@
         }
         return number;
       };
-
       var returnRandomArrayitem = function(array) {
         return array[Math.floor(Math.random() * array.length)];
       };
-
       pna = new ParticleNetworkAnimation();
       pna.init($(".testing")[0]);
     })();

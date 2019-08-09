@@ -1,8 +1,18 @@
 .header-title {
+  float: left;
   color: #ffffff;
   font-size: 30px;
   font-weight: 1000;
   letter-spacing: 5px;
+}
+@media screen and (max-width: 550px) {
+  .header-title {
+    float: left;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 1000;
+    letter-spacing: 0;
+  }
 }
 img {
   width: 40px;

@@ -1,26 +1,37 @@
-import React from 'react';
-import { Layout } from 'antd';
-import Head from './header/index';
-import SiderBar from './siderBar/index';
+import React from "react";
+import Head from "./header/index";
+import { Layout, Menu, Breadcrumb, Icon } from "antd";
+import SiderBar from "./siderBar/index";
+import SentenceLib from "./content/homePage";
+const { SubMenu } = Menu;
+const { Header, Content, Footer, Sider } = Layout;
 
-const { Header, Footer, Sider, Content } = Layout;
-
-const Index = ()=> {
+const Index = () => {
+  const test = false;
   return (
-    <div>
-      <Layout>
-      <Header>
+    <Layout>
+      <Header className="header">
         <Head />
       </Header>
-      <Layout style={{marginTop: "20px"}}>
-        <Sider style={{background: "#ffffff", marginLeft: "50px"}}>
-          <SiderBar />
-        </Sider>
-        <Content>Content</Content>
-      </Layout>
-      <Footer>Footer</Footer>
+      <Content style={{ padding: "0 50px" }}>
+        <Breadcrumb style={{ margin: "16px 0" }}>
+          <Breadcrumb.Item>Home</Breadcrumb.Item>
+          <Breadcrumb.Item>List</Breadcrumb.Item>
+          <Breadcrumb.Item>App</Breadcrumb.Item>
+        </Breadcrumb>
+        <Layout style={{ padding: "24px 0", background: "#fff" }}>
+          <Sider width={200} style={{ background: "#fff" }}>
+            <SiderBar />
+          </Sider>
+          <Content style={{ padding: "0 24px", minHeight: 280 }}>
+            <SentenceLib />
+          </Content>
+        </Layout>
+      </Content>
+      <Footer style={{ textAlign: "center" }}>
+        Ant Design ©2018 Created by Ant UED
+      </Footer>
     </Layout>
-    </div>
-  )
-}
+  );
+};
 export default Index;

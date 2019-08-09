@@ -1,29 +1,30 @@
-import React from 'react';
-import { Menu, Icon, Switch } from 'antd';
+import React from "react";
+import { Menu, Icon } from "antd";
 
 const { SubMenu } = Menu;
 
 class SiderBar extends React.Component {
   render() {
+    const siderData = [ 
+      { iconType: "home", text: "首页" },
+      { iconType: "setting", text: "更多功能(暂未开放)" }
+    ];
     return (
-      <div>
-        <Menu
-          style={{ width: 200, height: "46rem" }}
-          defaultSelectedKeys={['1']}
-          defaultOpenKeys={['sub1']}
-          mode={"inline"}
-          theme={"light"}
-        >
-          <Menu.Item key="1">
-            <Icon type="home" />
-            首页
-          </Menu.Item>
-          <Menu.Item key="2">
-            <Icon type="question-circle" />
-            更多功能
-          </Menu.Item>
-        </Menu>
-      </div>
+      <Menu
+        mode="inline"
+        defaultSelectedKeys={["1"]}
+        defaultOpenKeys={["sub1"]}
+        style={{ height: "100%" }}
+      >
+        {siderData.map((item, index) => {
+          return (
+            <Menu.Item key={index + 1}>
+              <Icon type={item.iconType} />
+              {item.text}
+            </Menu.Item>
+          );
+        })}
+      </Menu>
     );
   }
 }
