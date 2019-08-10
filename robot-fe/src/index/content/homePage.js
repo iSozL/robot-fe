@@ -5,9 +5,9 @@ import "./homePage.css";
 
 const SentenceLib = () => {
   const funcData = [
-    { icon: "message", name: "浩浩语料库" },
-    { icon: "setting", name: "浩浩语句设置" },
-    { icon: "gift", name: "彩蛋设置" },
+    { icon: "message", name: "浩浩语料库", path: "/sentence" },
+    { icon: "setting", name: "浩浩语句设置", path: "/reply"},
+    { icon: "gift", name: "彩蛋设置", path: "/egg" },
   ];
   return (
     <div>
@@ -16,7 +16,7 @@ const SentenceLib = () => {
       <div>
         {funcData.map(item => {
           return (
-            <Link to="/sentence">
+            <Link to={item.path}>
             <Card style={{ width: "120px", height: "120px", float: "left", marginRight: "20px", marginBottom: "20px" }}>
               <Icon
                 type={item.icon}
