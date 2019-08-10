@@ -2,6 +2,7 @@ import React from "react";
 import Head from "../index/header/index";
 import { Layout, Menu, Breadcrumb, Icon } from "antd";
 import SiderBar from "../index/siderBar/index";
+import { Link } from "react-router-dom";
 const { SubMenu } = Menu;
 const { Header, Content, Footer, Sider } = Layout;
 class Layouts extends React.Component {
@@ -16,14 +17,16 @@ class Layouts extends React.Component {
         </Header>
         <Content style={{ padding: "0 50px" }}>
           <Breadcrumb style={{ margin: "16px 0" }}>
-            <Breadcrumb.Item>首页</Breadcrumb.Item>
+            <Breadcrumb.Item>
+              <Link to="/">回到首页</Link>
+            </Breadcrumb.Item>
           </Breadcrumb>
           <Layout style={{ padding: "24px 0", background: "#fff" }}>
             <Sider width={200} style={{ background: "#fff" }}>
               <SiderBar />
             </Sider>
             <Content style={{ padding: "0 24px", minHeight: 280 }}>
-            {this.props.children}
+              {this.props.children}
             </Content>
           </Layout>
         </Content>

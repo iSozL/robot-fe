@@ -12,7 +12,8 @@ import Index from "../src/index/index";
 import Layouts from "../src/utils/routeUtils";
 import SentencePlugin from "../src/index/content/sentencePlugin/sentencePlugin";
 import ReplyTime from "../src/index/content/replyTime/replyTime";
-import Egg from "../src/index/content/egg/egg"
+import Egg from "../src/index/content/egg/egg";
+import More from "../src/index/more/index"
 function App() {
   const OtherPage = (
     <Layouts>
@@ -20,6 +21,7 @@ function App() {
       <Route path="/sentence" component={SentencePlugin} />
       <Route path="/reply" component={ReplyTime} />
       <Route path="/egg" component={Egg} />
+      <Route path="/more" component={More} />
     </Layouts>
   );
   return (
