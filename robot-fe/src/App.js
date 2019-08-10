@@ -12,12 +12,14 @@ import Index from "../src/index/index";
 import Layouts from "../src/utils/routeUtils";
 import SentencePlugin from "../src/index/content/sentencePlugin/sentencePlugin";
 import ReplyTime from "../src/index/content/replyTime/replyTime";
+import Egg from "../src/index/content/egg/egg"
 function App() {
   const OtherPage = (
     <Layouts>
       <Route exact path="/" component={Index} />
       <Route path="/sentence" component={SentencePlugin} />
       <Route path="/reply" component={ReplyTime} />
+      <Route path="/egg" component={Egg} />
     </Layouts>
   );
   return (
