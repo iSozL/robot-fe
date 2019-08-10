@@ -13,7 +13,7 @@ const UploadFiles = () => {
     <div>
       <Upload {...props}>
         <Button>
-          <Icon type="upload" /> Upload
+          <Icon type="upload" /> 上传文件
         </Button>
       </Upload>
     </div>

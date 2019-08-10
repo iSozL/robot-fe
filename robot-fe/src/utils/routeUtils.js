@@ -1,18 +1,3 @@
-// import React from "react";
-// class Layouts extends React.Component {
-//   constructor(props) {
-//     super(props);
-//   }
-//   render() {
-//     return (
-//       <div>
-//         {this.props.children}
-//       </div>
-//     );
-//   }
-// }
-
-// export default Layouts;
 import React from "react";
 import Head from "../index/header/index";
 import { Layout, Menu, Breadcrumb, Icon } from "antd";
@@ -31,9 +16,7 @@ class Layouts extends React.Component {
         </Header>
         <Content style={{ padding: "0 50px" }}>
           <Breadcrumb style={{ margin: "16px 0" }}>
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item>List</Breadcrumb.Item>
-            <Breadcrumb.Item>App</Breadcrumb.Item>
+            <Breadcrumb.Item>首页</Breadcrumb.Item>
           </Breadcrumb>
           <Layout style={{ padding: "24px 0", background: "#fff" }}>
             <Sider width={200} style={{ background: "#fff" }}>

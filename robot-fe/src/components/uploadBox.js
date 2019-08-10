@@ -38,6 +38,8 @@ class UploadBox extends React.Component {
           onOk={this.handleOk}
           onCancel={this.handleCancel}
           width={400}
+          cancelText={"取消"}
+          okText={"上传"}
         >
         <div style={{fontWeight: 1000, marginBottom: 10}}>
           文件名称: <Input placeholder="文件名称" style={{width: 200,marginLeft: 20}} />
