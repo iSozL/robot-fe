@@ -3,9 +3,8 @@ import React from "react";
 import {
   BrowserRouter as Router,
   Switch,
-  Redirect,
   Route,
-  Link
+  Redirect
 } from "react-router-dom";
 import Login from "../src/login/index";
 import Index from "../src/index/index";
@@ -28,7 +27,7 @@ function App() {
     <Router>
       <Switch>
         <Route path="/login" component={Login} />
-        <Route path="/" render={props => OtherPage} />
+        <Route path="/" render={() => (window.localStorage.getItem("token") ? OtherPage : <Redirect to="/login"></Redirect>)} />
       </Switch>
     </Router>
   );

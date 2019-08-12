@@ -1,13 +1,17 @@
 import React from "react";
 import Head from "../index/header/index";
-import { Layout, Menu, Breadcrumb, Icon } from "antd";
+import { Layout, Breadcrumb } from "antd";
 import SiderBar from "../index/siderBar/index";
 import { Link } from "react-router-dom";
-const { SubMenu } = Menu;
 const { Header, Content, Footer, Sider } = Layout;
 class Layouts extends React.Component {
-  constructor(props) {
-    super(props);
+
+  componentWillMount() {
+    if(window.localStorage.getItem("token")) {
+      console.log("已登录")
+    } else {
+      window.location.href = "/login"
+    }
   }
   render() {
     return (
@@ -31,7 +35,7 @@ class Layouts extends React.Component {
           </Layout>
         </Content>
         <Footer style={{ textAlign: "center" }}>
-          Ant Design ©2018 Created by Ant UED
+          RobotHao-Fe ©2019 Created by NcuHomer
         </Footer>
       </Layout>
     );

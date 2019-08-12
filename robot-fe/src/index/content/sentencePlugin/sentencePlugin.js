@@ -6,7 +6,7 @@ class SentencePlugin extends React.Component {
   render() {
     return (
       <div>
-        <div class="content-header">浩浩语句库/插件</div>
+        <div className="content-header">浩浩语句库/插件</div>
         <Divider />
         <UploadBox />
       </div>

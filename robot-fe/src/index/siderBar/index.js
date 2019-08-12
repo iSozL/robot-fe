@@ -2,8 +2,6 @@ import React from "react";
 import { Menu, Icon } from "antd";
 import { Link } from "react-router-dom";
 
-const { SubMenu } = Menu;
-
 class SiderBar extends React.Component {
   render() {
     // 侧边栏项目的数据,link是跳转路由

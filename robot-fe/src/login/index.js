@@ -40,6 +40,7 @@ class Login extends React.Component {
         if(res.status === 200) {
           window.localStorage.setItem('username', res.data.truename);
           window.localStorage.setItem('userImage', res.data.photo);
+          window.localStorage.setItem('token', res.headers.authorization)
           this.props.history.push('/');
         }
       },

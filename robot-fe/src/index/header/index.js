@@ -2,9 +2,9 @@ import React from "react";
 import "./index.css";
 import { Menu, Dropdown } from "antd";
 class Head extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
   logout() {
     localStorage.clear();
     window.location.href = "/login";
@@ -22,7 +22,7 @@ class Head extends React.Component {
         <div className="header-title">浩浩机器人</div>
         <div className="userInfo">
           <Dropdown overlay={menu}>
-            <img src={window.localStorage.getItem("userImage")} />
+            <img src={window.localStorage.getItem("userImage")} alt="登录" />
           </Dropdown>
           {window.localStorage.getItem("username")}
         </div>

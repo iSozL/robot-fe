@@ -11,12 +11,12 @@ const SentenceLib = () => {
   ];
   return (
     <div>
-      <div class="content-header">浩浩语句库</div>
+      <div className="content-header">浩浩语句库</div>
       <Divider />
       <div>
-        {funcData.map(item => {
+        {funcData.map((item, index) => {
           return (
-            <Link to={item.path}>
+            <Link to={item.path} key={index}>
             <Card style={{ width: "120px", height: "120px", float: "left", marginRight: "20px", marginBottom: "20px" }}>
               <Icon
                 type={item.icon}

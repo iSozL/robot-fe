@@ -6,7 +6,7 @@ const columns = [
     title: '群名',
     dataIndex: 'name',
     key: 'name',
-    render: text => <a href="javascript:;">{text}</a>,
+    render: text => <div>{text}</div>,
   },
   {
     title: '群号',
@@ -43,9 +43,9 @@ const columns = [
     key: 'action',
     render: (text, record) => (
       <span>
-        <a href="javascript:;">Invite {record.name}</a>
+        <div>Invite {record.name}</div>
         <Divider type="vertical" />
-        <a href="javascript:;">Delete</a>
+        <div>Delete</div>
       </span>
     ),
   },
