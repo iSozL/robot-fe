@@ -1,6 +1,6 @@
 import React from "react";
 import Head from "../index/header/index";
-import { Layout, Breadcrumb } from "antd";
+import { Layout, Breadcrumb, message } from "antd";
 import SiderBar from "../index/siderBar/index";
 import { Link } from "react-router-dom";
 const { Header, Content, Footer, Sider } = Layout;
@@ -10,6 +10,7 @@ class Layouts extends React.Component {
     if(window.localStorage.getItem("token")) {
       console.log("已登录")
     } else {
+      message.warning("请重新登录")
       window.location.href = "/login"
     }
   }

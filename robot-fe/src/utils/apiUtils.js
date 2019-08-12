@@ -12,8 +12,7 @@ export default {
           resolve(res);
         })
         .catch(function(error) {
-          reject(error);
-          // console.log(error);
+          reject(error.response.data);
         });
     });
   }

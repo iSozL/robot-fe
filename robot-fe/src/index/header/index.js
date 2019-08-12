@@ -1,12 +1,10 @@
 import React from "react";
 import "./index.css";
-import { Menu, Dropdown } from "antd";
+import { Menu, Dropdown, message } from "antd";
 class Head extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  // }
   logout() {
     localStorage.clear();
+    message.success("已退出");
     window.location.href = "/login";
   }
   render() {

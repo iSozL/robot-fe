@@ -1,8 +1,8 @@
 import React from "react";
-import { Input, Tooltip, Icon, Checkbox, Button } from "antd";
+import { Input, Tooltip, Icon, Checkbox, Button, message, Spin } from "antd";
 import "./index.css";
 import api from "../utils/apiUtils";
-import Forget from "../login/forgetPassword/index"
+import Forget from "../login/forgetPassword/index";
 
 class Login extends React.Component {
   constructor(props) {
@@ -14,10 +14,9 @@ class Login extends React.Component {
     this.state = {
       username: "",
       password: "",
-      remember_me: true
+      remember_me: true,
     };
   }
-
   userChange(e) {
     const _username = e.target.value;
     this.setState({ username: _username });
@@ -30,25 +29,32 @@ class Login extends React.Component {
     this.setState({ remember_me: !this.state.remember_me });
   }
   login() {
-    const datas = { 
-      username: this.state.username,
-      password: this.state.password,
-      remember_me: this.state.remember_me
-    };
-    api.fetchData("api/user/login", "post", datas).then(
-      res => {
-        console.log(res.data);
-        if(res.status === 200) {
-          window.localStorage.setItem('username', res.data.truename);
-          window.localStorage.setItem('userImage', res.data.photo);
-          window.localStorage.setItem('token', res.headers.authorization)
-          this.props.history.push('/');
+    if(this.state.username && this.state.password) {
+      const datas = {
+        username: this.state.username,
+        password: this.state.password,
+        remember_me: this.state.remember_me
+      };
+      api.fetchData("api/user/login", "post", datas).then(
+        res => {
+          if (res.status === 200) {
+            window.localStorage.setItem("username", res.data.truename);
+            window.localStorage.setItem("userImage", res.data.photo);
+            window.localStorage.setItem("token", res.headers.authorization);
+            this.props.history.push("/");
+            console.log(res)
+            message.success("登录成功")
+          } else {
+            message.error(res.data.message) 
+          }
+        },
+        error => {
+          message.error(error.message.toString())
         }
-      },
-      error => {
-        console.log(error);
-      }
-    );
+      );
+    } else {
+      message.warning("请输入用户名或密码")
+    }
   }
   render() {
     return (
@@ -87,7 +93,7 @@ class Login extends React.Component {
           >
             自动登录
           </Checkbox>
-          <div style={{ float: "right" }}><Forget /></div>
+          <Forget />
         </div>
         <Button type="primary" block onClick={this.login}>
           登录

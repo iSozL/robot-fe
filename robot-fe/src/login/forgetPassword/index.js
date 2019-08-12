@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, Button, Input } from "antd";
+import { Modal, Input, message } from "antd";
 import api from "../../utils/apiUtils";
 
 class Forget extends React.Component {
@@ -10,21 +10,25 @@ class Forget extends React.Component {
     });
   };
 
-  hideModal = () => {
+  confirmModal = () => {
     const datas = {
       username: this.state.username
+    };
+    if (this.state.username) {
+      api.fetchData("api/user/forgot_password", "post", datas).then(res => {
+        message.success(res.data.message);
+      }, error => {
+        message.error(error.message.toString())
+      })
+    } else {
+      console.log("请输入用户名")
     }
-    api
-      .fetchData("api/user/forgot_password", "post", datas)
-      .then(
-        res => {
-          console.log(res.data)
-        }
-      );
+  };
+  cancelModal = () => {
     this.setState({
       visible: false
     });
-  };
+  }
 
   getUsername = e => {
     let _username = e.target.value;
@@ -35,15 +39,15 @@ class Forget extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={{ float: "right" }}>
         <a type="primary" onClick={this.showModal}>
           忘记密码
         </a>
         <Modal
           title="忘记密码"
           visible={this.state.visible}
-          onOk={this.hideModal}
-          onCancel={this.hideModal}
+          onOk={this.confirmModal}
+          onCancel={this.cancelModal}
           okText="确认"
           cancelText="取消"
         >
