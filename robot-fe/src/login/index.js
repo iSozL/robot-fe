@@ -2,6 +2,7 @@ import React from "react";
 import { Input, Tooltip, Icon, Checkbox, Button } from "antd";
 import "./index.css";
 import api from "../utils/apiUtils";
+import Forget from "../login/forgetPassword/index"
 
 class Login extends React.Component {
   constructor(props) {
@@ -86,7 +87,7 @@ class Login extends React.Component {
           >
             自动登录
           </Checkbox>
-          <div style={{ float: "right" }}>忘记密码</div>
+          <div style={{ float: "right" }}><Forget /></div>
         </div>
         <Button type="primary" block onClick={this.login}>
           登录
