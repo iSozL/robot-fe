@@ -12,7 +12,7 @@ import Layouts from "../src/utils/routeUtils";
 import SentencePlugin from "../src/index/content/sentencePlugin/sentencePlugin";
 import ReplyTime from "../src/index/content/replyTime/replyTime";
 import Egg from "../src/index/content/egg/egg";
-import More from "../src/index/more/index"
+import More from "../src/index/more/index";
 function App() {
   const OtherPage = (
     <Layouts>
@@ -27,7 +27,16 @@ function App() {
     <Router>
       <Switch>
         <Route path="/login" component={Login} />
-        <Route path="/" render={() => (window.localStorage.getItem("token") ? OtherPage : <Redirect to="/login"></Redirect>)} />
+        <Route
+          path="/"
+          render={() =>
+            window.localStorage.getItem("token") && window.localStorage.getItem("userImage") ? (
+              OtherPage
+            ) : (
+              <Redirect to="/login" />
+            )
+          }
+        />
       </Switch>
     </Router>
   );
