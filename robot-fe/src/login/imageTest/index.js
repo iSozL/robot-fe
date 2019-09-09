@@ -7,6 +7,6 @@ function testImg(url) {
   xmlHttp = new XMLHttpRequest();
   xmlHttp.open("Get", url, false);
   xmlHttp.send();
-  return xmlHttp.status !== 200 ? false : true;
+  return xmlHttp.status == 200 ? true : false;
 }
 export default testImg;

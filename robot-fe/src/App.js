@@ -13,7 +13,7 @@ import SentencePlugin from "../src/index/content/sentencePlugin/sentencePlugin";
 import ReplyTime from "../src/index/content/replyTime/replyTime";
 import Egg from "../src/index/content/egg/egg";
 import More from "../src/index/more/index";
-import testImg from "../src/login/imageTest/index"
+import testImg from "../src/login/imageTest/index";
 function App() {
   const OtherPage = (
     <Layouts>
@@ -24,7 +24,6 @@ function App() {
       <Route path="/more" component={More} />
     </Layouts>
   );
-  const isValue = testImg(localStorage.getItem("userImage"))
   return (
     <Router>
       <Switch>
@@ -32,7 +31,12 @@ function App() {
         <Route
           path="/"
           render={() =>
-            window.localStorage.getItem("token") && isValue ? (
+            // token
+            window.localStorage.getItem("token") &&
+            // 图片url是否有用
+            testImg(localStorage.getItem("userImage")) &&
+            // 图片地址是否存在
+            window.localStorage.getItem("userImage") ? (
               OtherPage
             ) : (
               <Redirect to="/login" />
