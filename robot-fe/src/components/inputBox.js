@@ -109,7 +109,7 @@ class InputBox extends React.Component {
           onCancel={this.handleCancel}
           width={400}
           cancelText={"取消"}
-          okText={"确定"}
+          okText={"完成"}
         >
           {this.props.content.map((item, index) => {
             return (

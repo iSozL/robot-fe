@@ -3,10 +3,11 @@ import axios from "axios";
 
 // 判断图片是否有效
 function testImg(url) {
-  var xmlHttp;
-  xmlHttp = new XMLHttpRequest();
-  xmlHttp.open("Get", url, false);
-  xmlHttp.send();
-  return xmlHttp.status == 200 ? true : false;
+  // var xmlHttp;
+  // xmlHttp = new XMLHttpRequest();
+  // xmlHttp.open("Get", url, false);
+  // xmlHttp.send();
+  // return xmlHttp.status == 200 ? true : false;
+  return true
 }
 export default testImg;
