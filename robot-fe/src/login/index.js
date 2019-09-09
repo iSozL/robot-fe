@@ -42,7 +42,6 @@ class Login extends React.Component {
             window.localStorage.setItem("userImage", res.data.photo);
             window.localStorage.setItem("token", res.headers.authorization);
             this.props.history.push("/");
-            console.log(res)
             message.success("登录成功")
           } else {
             message.error(res.data.message) 

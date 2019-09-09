@@ -13,6 +13,7 @@ import SentencePlugin from "../src/index/content/sentencePlugin/sentencePlugin";
 import ReplyTime from "../src/index/content/replyTime/replyTime";
 import Egg from "../src/index/content/egg/egg";
 import More from "../src/index/more/index";
+import testImg from "../src/login/imageTest/index"
 function App() {
   const OtherPage = (
     <Layouts>
@@ -23,6 +24,7 @@ function App() {
       <Route path="/more" component={More} />
     </Layouts>
   );
+  const isValue = testImg(localStorage.getItem("userImage"))
   return (
     <Router>
       <Switch>
@@ -30,7 +32,7 @@ function App() {
         <Route
           path="/"
           render={() =>
-            window.localStorage.getItem("token") && window.localStorage.getItem("userImage") ? (
+            window.localStorage.getItem("token") && isValue ? (
               OtherPage
             ) : (
               <Redirect to="/login" />
