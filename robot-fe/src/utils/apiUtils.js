@@ -17,7 +17,7 @@ export default {
     });
   },
   mainData(url, methods, datas) {
-    // axios.defaults.headers.post['Content-Type'] = 'application/json';
+    axios.defaults.headers.post['Content-Type'] = 'application/json';
     return new Promise((resolve, reject) => {
       axios({
         url: url,

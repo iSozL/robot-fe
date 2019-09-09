@@ -1,6 +1,7 @@
 import React from "react";
-import { Modal, Button, Input, Icon } from "antd";
+import { Modal, Button, Input, Icon, message } from "antd";
 import api from "../utils/apiUtils";
+import url from "../utils/url";
 
 const { TextArea } = Input;
 class InputBox extends React.Component {
@@ -13,45 +14,60 @@ class InputBox extends React.Component {
     };
   }
   addQuestion() {
-    api.mainData("url:8002/excel", 'post', this.state.data).then(
-      res => {
-        console.log(res)
+    api.mainData(`${url}/excel`, "post", this.state.data).then(res => {
+      if (res.data.status == 1) {
+        message.success(res.data.message);
+      } else {
+        message.error(res.data.message);
       }
-    )
+    });
   }
   delete() {
-    api.mainData("url:8002/excel", "delete", this.state.data).then(
-      res => {
-        console.log(res)
+    /* 
+       对于这个为什么拿的是question参数
+       因为写的时候是第一个input框是question,第二个是answer,但是delete只需要回答,但是我又不想再做判断,
+       所以拿到question的数据实际上是填的回答
+    */
+    let datas = {
+      answer: [this.state.question]
+    };
+    api.mainData(`${url}/excel`, "delete", datas).then(res => {
+      if (res.data.status == 1) {
+        message.success(res.data.message);
+      } else {
+        message.error(res.data.message);
       }
-    )
+    });
   }
   change() {
-    api.mainData("url:8002/excel", "put", this.state.data).then(
-      res => {
-        console.log(res)
+    api.mainData(`${url}/excel`, "put", this.state.data).then(res => {
+      if (res.data.status == 1) {
+        message.success(res.data.message);
+      } else {
+        message.error(res.data.message);
       }
-    )
+    });
   }
 
   // onChange性能不会很低吗？
   getData = e => {
     e.preventDefault();
-    if(e.target.id === "0") {
+    // id 用来区别填写问题和回答的框
+    if (e.target.id === "0") {
       this.setState({
         question: e.target.value
-      })
+      });
     } else {
       this.setState({
         answer: e.target.value
-      })
+      });
     }
     this.setState({
       data: {
-        "question": [this.state.question],
-        "answer": [this.state.answer]
+        question: [this.state.question],
+        answer: [this.state.answer]
       }
-    })
+    });
   };
   state = { visible: false };
   showModal = () => {
@@ -64,12 +80,12 @@ class InputBox extends React.Component {
     this.setState({
       visible: false
     });
-    if(this.props.type === "add") {
-      this.addQuestion()
+    if (this.props.type === "add") {
+      this.addQuestion();
     } else if (this.props.type === "delete") {
-      this.delete()
-    } else if(this.props.type === "change") {
-      this.change()
+      this.delete();
+    } else if (this.props.type === "change") {
+      this.change();
     }
   };
 
