@@ -52,7 +52,7 @@ class InputBox extends React.Component {
     // 这里的file_name与delete的同理
     const downloadData = {file_name: this.state.question};
     console.log(downloadData)
-    api.mainData(`${url}/excel/download`, "get", downloadData).then(res => {
+    api.mainData(`${url}/excel/download?${downloadData}`, "get").then(res => {
       if (res.data.status == 1) {
         message.success(res.data.message);
       } else {
