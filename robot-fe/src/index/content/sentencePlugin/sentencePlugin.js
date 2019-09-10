@@ -9,6 +9,7 @@ class SentencePlugin extends React.Component {
     const addData = ["问题", "回答"]
     const changeData = ["问题", "回答"]
     const deleteData = ["回答"]
+    const file_name = ["下载文件名"]
     
     return (
       <div>
@@ -17,6 +18,9 @@ class SentencePlugin extends React.Component {
         <Row>
           <Col span={3}>
             <UploadBox />
+          </Col>
+          <Col span={3}>
+            <InputBox type="download" title="下载文档" buttonType="primary" iconType="file-excel" content={file_name}/>
           </Col>
           <Col span={3}>
             <InputBox type="add" title="新增问答" buttonType="default" iconType="question" content={addData} />

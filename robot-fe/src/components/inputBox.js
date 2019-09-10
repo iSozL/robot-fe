@@ -48,6 +48,18 @@ class InputBox extends React.Component {
       }
     });
   }
+  download() {
+    // 这里的file_name与delete的同理
+    const downloadData = {file_name: this.state.question};
+    console.log(downloadData)
+    api.mainData(`${url}/excel/download`, "get", downloadData).then(res => {
+      if (res.data.status == 1) {
+        message.success(res.data.message);
+      } else {
+        message.error(res.data.message);
+      }
+    });
+  }
 
   // onChange性能不会很低吗？
   getData = e => {
@@ -86,6 +98,8 @@ class InputBox extends React.Component {
       this.delete();
     } else if (this.props.type === "change") {
       this.change();
+    } else if (this.props.type === "download") {
+      this.download();
     }
   };
 

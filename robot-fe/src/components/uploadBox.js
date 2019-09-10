@@ -35,6 +35,8 @@ class UploadBox extends React.Component {
         <Modal
           title="上传文件"
           visible={this.state.visible}
+          onOk={this.handleOk}
+          onCancel={this.handleCancel}
           width={400}
           footer={null}
         >
